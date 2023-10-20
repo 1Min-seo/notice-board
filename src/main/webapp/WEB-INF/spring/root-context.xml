@@ -11,13 +11,11 @@
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 		
-</beans>
-
-<!-- 오라클 접속 -->
+	<!-- 오라클 접속 -->
     <bean class="org.springframework.jdbc.datasource.DriverManagerDataSource" id="dataSource">
         <property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"/>
         <property name="url" value="jdbc:log4jdbc:oracle:thin:@localhost:1521/orcl"/>
-        <property name="username" value="MelonPeach"/>
+        <property name="username" value="${jdbc.username}"/>
         <property name="password" value="1206"/>
     </bean>
    
@@ -30,3 +28,5 @@
     <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">
         <constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"></constructor-arg>
     </bean>
+</beans>
+
