@@ -1,5 +1,7 @@
 package kr.co.dao;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
@@ -18,4 +20,17 @@ public class BoardDAOImpl implements BoardDAO{
 		sqlSession.insert("boardMapper.insert",boardVO);
 	}
 
+	//게시글 목록 보기
+	public List<BoardVO> list() throws Exception{
+		
+		return sqlSession.selectList("boardMapper.list");
+		//boardMapper.xml에서 mapper의 namespace가 boardMapper이고
+		//그 중에 id가 list인 것 반환
+	}
+	
+	//게시글 조회
+	public BoardVO read(int bno) throws Exception{
+		
+		return sqlSession.selectOne("boardMapper.read",bno);
+	}
 }

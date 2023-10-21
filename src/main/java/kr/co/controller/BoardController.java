@@ -5,6 +5,7 @@ import javax.inject.Inject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -32,7 +33,27 @@ public class BoardController {
 		
 		service.write(boardVO);
 		
-		return "redirect:/";
+		return "redirect:/list";
+	}
+	
+	//게시판 목록
+	@GetMapping("/list")
+	public String list(Model model) throws Exception{
+		logger.info("list");
+		
+		model.addAttribute("list",service.list());
+		
+		return "board/list";
+	}
+	
+	//게시글 조회
+	@GetMapping("/readView")
+	public String read(Model model, BoardVO boardVO) throws Exception{
+		logger.info("read");
+		
+		model.addAttribute("read",service.read(boardVO.getBno()));
+		
+		return "board/readView";
 	}
 	
 	
